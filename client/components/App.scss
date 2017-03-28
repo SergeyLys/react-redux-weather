@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+h1 {
+  text-align: center;
+}
+
+.city-wrapper {
+  display: flex;
+  position: relative;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-around;
+
+  p {
+    text-align: center;
+
+    span {
+      display: block;
+    }
+  }
+
+ .add-button {
+   position: absolute;
+   right: -30px;
+   top: 15px;
+
+   &.disable {
+     display: none !important;
+   }
+ }
+}
