@@ -7,7 +7,6 @@ import './App.scss';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import ContentRemove from 'material-ui/svg-icons/content/remove';
 
 class App extends React.Component {
 
@@ -71,49 +70,50 @@ class App extends React.Component {
         }
     }
 
-    removeCity() {
-        this.props.onRemoveCity(this.state.name);
+    removeCity(city) {
+        this.props.onRemoveCity(city);
     }
 
     render() {
         return (
-           <div className="app">
+            <div className="app">
 
-               <SearchForm onSubmit={this.handleSearch.bind(this)} />
-               <ButtonList
-                   onChange={this.handleChange.bind(this)}
-                   onRemove={this.removeCity.bind(this)}
-                   location={this.props.cities}
-               />
+                <SearchForm onSubmit={this.handleSearch.bind(this)} />
 
-               <h1>{this.state.name}</h1>
-               <div className="city-wrapper">
-                   <FloatingActionButton
-                       mini={true}
-                       secondary={true}
-                       onClick={this.addCity.bind(this)}
-                       className={this.props.cities.indexOf(this.state.name) == -1 ? 'add-button ' : 'add-button disable'}
-                   >
-                       <ContentAdd />
-                   </FloatingActionButton>
+                {
+                    this.state.name != '' && this.state.name != 'Connaught Place' ?
 
-                   <FloatingActionButton
-                       mini={true}
-                       secondary={true}
-                       onClick={this.removeCity.bind(this)}
-                       className={this.props.cities.indexOf(this.state.name) == -1 ? 'add-button disable' : 'add-button '}
-                   >
-                       <ContentRemove />
-                   </FloatingActionButton>
+                    <div>
 
-                   <p>Max temp. <span>{this.state.temp_max}&deg;</span> </p>
-                   <p>Min temp. <span>{this.state.temp_min}&deg;</span></p>
-                   <p>Middle temp. <span>{this.state.temp}&deg;</span></p>
-                   <p>Влажность: <span>{this.state.humidity}%</span></p>
-                   <p>Давление: <span>{this.state.pressure}мм рт. ст.</span></p>
-                   <p>Осадки: <span>{this.state.weather.description} <br/> {this.state.weather.main}</span></p>
-               </div>
-           </div>
+                        <ButtonList
+                            onChange={this.handleChange.bind(this)}
+                            onRemove={this.removeCity.bind(this)}
+                            location={this.props.cities}
+                        />
+
+                        <h1>{this.state.name}</h1>
+                        <div className="city-wrapper">
+
+                            <FloatingActionButton
+                                mini={true}
+                                secondary={true}
+                                onClick={this.addCity.bind(this)}
+                                className={this.props.cities.indexOf(this.state.name) == -1 ? 'add-button ' : 'add-button disable'}
+                            >
+                                <ContentAdd />
+                            </FloatingActionButton>
+
+                            <p>Max temp. <span>{this.state.temp_max}&deg;</span> </p>
+                            <p>Min temp. <span>{this.state.temp_min}&deg;</span></p>
+                            <p>Middle temp. <span>{this.state.temp}&deg;</span></p>
+                            <p>Влажность: <span>{this.state.humidity}%</span></p>
+                            <p>Давление: <span>{this.state.pressure}мм рт. ст.</span></p>
+                            <p>Осадки: <span>{this.state.weather.description} <br/> {this.state.weather.main}</span></p>
+                        </div>
+                    </div> : ''
+                }
+
+            </div>
         );
     }
 }

@@ -1,5 +1,19 @@
 import React from 'react';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import Chip from 'material-ui/Chip';
+
+const styles = {
+    wrapper: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginTop: 30,
+        marginBottom: 20,
+    },
+    chip: {
+        marginLeft: 5,
+        marginRight: 5,
+    }
+};
 
 export default class ButtonList extends React.Component {
     removeItem(event) {
@@ -9,15 +23,21 @@ export default class ButtonList extends React.Component {
 
     render() {
         return (
-            <Tabs>
+            <div style={styles.wrapper}>
                 {this.props.location.map((city, index)=> {
                     return (
-                        <Tab key={index} label={city} onClick={() => this.props.onChange(city)}></Tab>
+                        <Chip
+                            key={index}
+                            style={styles.chip}
+                            onRequestDelete={this.removeItem.bind(this)}
+                            onTouchTap={() => this.props.onChange(city)}
+                        >
+                            {city}
+                        </Chip>
                     )
                 })}
-            </Tabs>
+
+            </div>
         )
     }
 }
-
-// <li><span onClick={this.removeItem.bind(this)}>X</span> </li>

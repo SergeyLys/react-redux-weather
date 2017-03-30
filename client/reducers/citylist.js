@@ -1,4 +1,4 @@
-let initialState = ['Kiev', 'Kharkiv'];
+let initialState = [];
 
 export default function citylist (state = initialState, action) {
     switch (action.type) {
