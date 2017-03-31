@@ -16,26 +16,33 @@ const styles = {
 };
 
 export default class ButtonList extends React.Component {
-    removeItem(event) {
-        let cityToRemove = event.target.parentElement.children[0].innerHTML;
-        this.props.onRemove(cityToRemove);
+
+    constructor(){
+        super();
+        this.removeItem = this.removeItem.bind(this);
+    }
+
+    removeItem(city) {
+        this.props.onRemove(city);
     }
 
     render() {
         return (
             <div style={styles.wrapper}>
-                {this.props.location.map((city, index)=> {
-                    return (
-                        <Chip
-                            key={index}
-                            style={styles.chip}
-                            onRequestDelete={this.removeItem.bind(this)}
-                            onTouchTap={() => this.props.onChange(city)}
-                        >
-                            {city}
-                        </Chip>
-                    )
-                })}
+                {
+                    this.props.location.map((city, index)=> {
+                        return (
+                            <Chip
+                                key={index}
+                                style={styles.chip}
+                                onRequestDelete={() => this.removeItem(city)}
+                                onTouchTap={() => this.props.onChange(city)}
+                            >
+                                {city}
+                            </Chip>
+                        )
+                    })
+                }
 
             </div>
         )

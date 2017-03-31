@@ -27,7 +27,8 @@
     "webpack-dev-server": "^1.16.3",
     "webpack-preset": "^0.2.0",
     "webpack-preset-babel": "^0.2.0",
-    "webpack-preset-babel-stage-0": "^0.2.0"
+    "webpack-preset-babel-stage-0": "^0.2.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "autoprefixer-loader": "*",

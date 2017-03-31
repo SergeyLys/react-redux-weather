@@ -1,2 +1,6 @@
+.log
+.idea
+.directory
+.htaccess
 node_modules
 server

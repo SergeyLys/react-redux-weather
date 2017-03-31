@@ -1,72 +1,44 @@
 import React from 'react';
 import ButtonList from './ButtonList';
 import SearchForm from './SearchForm';
-import { connect } from 'react-redux';
+import Map from './Map';
+import 'whatwg-fetch';
 
 import './App.scss';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-class App extends React.Component {
+
+export default class App extends React.Component {
 
     constructor(props) {
         super(props);
         injectTapEventPlugin();
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.removeCity = this.removeCity.bind(this);
     }
-
-    state = {
-        id: '',
-        name: '',
-        humidity: '',
-        pressure: '',
-        temp: '',
-        temp_max: '',
-        temp_min: '',
-        weather: {
-            description: '',
-            main: ''
-        }
-    };
 
     componentDidMount() {
-        this.getLocation(this.props.cities[0]);
-    }
-
-    getLocation(city) {
-        var that = this;
-        $.ajax({
-            url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=0668067898307a2c11b3ef3f78365eb2&units=metric`,
-            dataType: "jsonp",
-            success: function (data) {
-                that.setState({
-                    id: data.id,
-                    name: data.name,
-                    humidity: data.main.humidity,
-                    pressure: data.main.pressure,
-                    temp: data.main.temp,
-                    temp_max: data.main.temp_max,
-                    temp_min: data.main.temp_min,
-                    weather: {
-                        description: data.weather[0].description,
-                        main: data.weather[0].main
-                    }
-                });
-            }
-        });
+        if (this.props.initialCity != '') {
+            this.props.getWeather(this.props.initialCity);
+        }
     }
 
     handleChange(city) {
-        this.getLocation(city);
+        this.props.currentCity != city ? this.props.getWeather(city) : '';
     }
 
     handleSearch(city) {
-        this.getLocation(city);
+        if (this.props.cityList.indexOf(city) == -1) {
+            this.props.getWeather(city);
+        }
     }
 
     addCity() {
-        if (this.props.cities.indexOf(this.state.name) == -1) {
-            this.props.onAddCity(this.state.name);
+        if (this.props.cityList.indexOf(this.props.currentCity) == -1) {
+            this.props.onAddCity(this.props.currentCity);
         }
     }
 
@@ -78,38 +50,45 @@ class App extends React.Component {
         return (
             <div className="app">
 
-                <SearchForm onSubmit={this.handleSearch.bind(this)} />
+                <SearchForm onSubmit={this.handleSearch} />
 
                 {
-                    this.state.name != '' && this.state.name != 'Connaught Place' ?
-
-                    <div>
-
+                    this.props.cityList.length != 0 ?
                         <ButtonList
-                            onChange={this.handleChange.bind(this)}
-                            onRemove={this.removeCity.bind(this)}
-                            location={this.props.cities}
-                        />
+                            onChange={this.handleChange}
+                            location={this.props.cityList}
+                            onRemove={this.removeCity}
+                        /> : ''
+                }
 
-                        <h1>{this.state.name}</h1>
+                {
+                    this.props.currentCity !== null ?
+                    <div>
+                        <h1>{this.props.cityInfo.name}</h1>
                         <div className="city-wrapper">
 
-                            <FloatingActionButton
-                                mini={true}
-                                secondary={true}
-                                onClick={this.addCity.bind(this)}
-                                className={this.props.cities.indexOf(this.state.name) == -1 ? 'add-button ' : 'add-button disable'}
-                            >
-                                <ContentAdd />
-                            </FloatingActionButton>
+                            {
+                                this.props.cityList.indexOf(this.props.currentCity) == -1 ?
+                                    <FloatingActionButton
+                                        mini={true}
+                                        secondary={true}
+                                        onClick={this.addCity.bind(this)}
+                                        className='add-btn'
+                                    >
+                                        <ContentAdd />
+                                    </FloatingActionButton> : ''
+                            }
 
-                            <p>Max temp. <span>{this.state.temp_max}&deg;</span> </p>
-                            <p>Min temp. <span>{this.state.temp_min}&deg;</span></p>
-                            <p>Middle temp. <span>{this.state.temp}&deg;</span></p>
-                            <p>Влажность: <span>{this.state.humidity}%</span></p>
-                            <p>Давление: <span>{this.state.pressure}мм рт. ст.</span></p>
-                            <p>Осадки: <span>{this.state.weather.description} <br/> {this.state.weather.main}</span></p>
+                            <p>Max temp. <span>{this.props.cityInfo.main.temp_max}&deg;</span> </p>
+                            <p>Min temp. <span>{this.props.cityInfo.main.temp_min}&deg;</span></p>
+                            <p>Middle temp. <span>{this.props.cityInfo.main.temp}&deg;</span></p>
+                            <p>Влажность: <span>{this.props.cityInfo.main.humidity}%</span></p>
+                            <p>Давление: <span>{this.props.cityInfo.main.pressure}мм рт. ст.</span></p>
+                            <p>Осадки: <span>{this.props.cityInfo.weather[0].description} <br/> {this.props.cityInfo.weather[0].main}</span></p>
                         </div>
+
+                        <Map coord={this.props.coord} />
+
                     </div> : ''
                 }
 
@@ -117,18 +96,3 @@ class App extends React.Component {
         );
     }
 }
-
-export default connect(
-    mapStateToProps => ({
-        cities: mapStateToProps
-    }),
-    mapDispatchToProps => ({
-        onAddCity: (city)=> {
-            mapDispatchToProps({ type: 'ADD_ITEM', payload: city });
-        },
-
-        onRemoveCity: (city)=> {
-            mapDispatchToProps({ type: 'REMOVE_ITEM', payload: city });
-        }
-    })
-)(App);

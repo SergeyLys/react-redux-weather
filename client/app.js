@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import Main from './containers/Main';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import citylist from './reducers/citylist';
@@ -12,7 +12,7 @@ let store = createStore(citylist, window.__REDUX_DEVTOOLS_EXTENSION__ && window.
 ReactDOM.render(
     <Provider store={store}>
         <MuiThemeProvider>
-            <App />
+            <Main />
         </MuiThemeProvider>
     </Provider>,
     document.getElementById('root')
