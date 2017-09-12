@@ -1,0 +1,19 @@
+.search-form {
+  display: flex;
+  align-items: center;
+  max-width: 344px;
+  margin-left: auto;
+  margin-right: auto;
+
+
+  .input-row {
+    position: relative;
+    margin-bottom: 20px;
+
+    .error {
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+  }
+}

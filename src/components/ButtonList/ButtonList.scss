@@ -1,0 +1,12 @@
+.list-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.chip {
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}

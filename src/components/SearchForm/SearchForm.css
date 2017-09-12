@@ -1,0 +1,13 @@
+.search-form {
+  display: flex;
+  align-items: center;
+  max-width: 344px;
+  margin-left: auto;
+  margin-right: auto; }
+  .search-form .input-row {
+    position: relative;
+    margin-bottom: 20px; }
+    .search-form .input-row .error {
+      position: absolute;
+      top: 100%;
+      left: 0; }

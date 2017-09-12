@@ -1,0 +1,14 @@
+.weather-table-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px; }
+  .weather-table-header .add-btn {
+    margin-left: 10px; }
+
+.weather-table-wrapper {
+  margin-bottom: 50px; }
+  .weather-table-wrapper table {
+    width: 100%; }
+    .weather-table-wrapper table th,
+    .weather-table-wrapper table td {
+      text-align: center; }
