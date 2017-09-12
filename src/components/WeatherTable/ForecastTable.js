@@ -8,6 +8,11 @@ export default class ForecastTable extends React.Component {
         visible: false
     };
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.currentCityInfo !== nextProps.currentCityInfo)
+            this.setState({visible: false});
+    }
+
     clickHandler = () => {
         const {name} = this.props.currentCityInfo;
         if (this.state.visible === false) {
@@ -20,9 +25,11 @@ export default class ForecastTable extends React.Component {
 
     render() {
 
+        const {visible} = this.state;
+
         return (
             <div className="forecast-table">
-                <RaisedButton label="Show 5 days forecast" primary={true} onTouchTap={this.clickHandler} />
+                <RaisedButton label={`${visible ? 'Hide' : 'Show'} 5 days forecast`} primary={true} onTouchTap={this.clickHandler} />
                 <div className="table-holder" style={{display: this.state.visible ? 'block' : 'none'}}>
                     <table >
                         <thead>

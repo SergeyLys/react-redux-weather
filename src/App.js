@@ -31,7 +31,7 @@ class App extends Component {
 
         var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-        this.props.weatherRequest('Kharkiv');
+        // this.props.weatherRequest('Kharkiv');
 
         geocoder.geocode({'latLng': latlng}, (results, status) => {
 
