@@ -51,7 +51,7 @@ export default class ForecastTable extends React.Component {
                     <RaisedButton
                         label={`${visible ? 'Hide' : 'Show'} 5 days forecast`}
                         primary={true}
-                        onTouchTap={this.clickHandler}
+                        onClick={this.clickHandler}
                     />
                 </div>
 

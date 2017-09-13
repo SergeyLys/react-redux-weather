@@ -53,7 +53,7 @@ export default class SearchForm extends React.Component {
                     {errors.city && <div style={{color: "#ae5856"}} className="error">{errors.city}</div>}
                 </div>
 
-                <RaisedButton label="Найти" primary={true} onTouchTap={this.handleSubmit}/>
+                <RaisedButton label="Найти" primary={true} onClick={this.handleSubmit}/>
             </form>
         )
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import SearchForm from '../../SearchForm/SearchForm';
 import WeatherTable from '../../WeatherTable/WeatherTable';
 import ButtonList from '../../ButtonList/ButtonList';
-import Map from '../../Map/Map';
+import MapComponent from '../../Map/Map';
 import './HomePage.css';
 
 const HomePage = ({...props}) => (
@@ -19,7 +19,7 @@ const HomePage = ({...props}) => (
             currentCityInfo={props.currentCityInfo}
             weatherForecastRequest={props.weatherForecastRequest}
         />
-        <Map currentCoord={props.currentCityInfo.coord}/>
+        <MapComponent currentCoord={props.currentCityInfo.coord}/>
 
     </div>
 );

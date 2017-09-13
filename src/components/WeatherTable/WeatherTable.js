@@ -6,17 +6,12 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import ForecastTable from './ForecastTable';
 
 const WeatherTable = ({...props}) => {
-    if (typeof props.currentCityInfo.cityInfo !== 'undefined') {
-        var {name} = props.currentCityInfo.cityInfo;
-        var {
-            humidity,
-            pressure,
-            temp,
-            temp_max,
-            temp_min
-        } = props.currentCityInfo.cityInfo.main;
-        var icon = props.currentCityInfo.cityInfo.weather[0].icon;
-    }
+    const {name} = typeof props.currentCityInfo.cityInfo !== 'undefined'
+        ? props.currentCityInfo.cityInfo.name : {};
+    const {humidity, pressure, temp, temp_max, temp_min} = typeof props.currentCityInfo.cityInfo !== 'undefined'
+        ? props.currentCityInfo.cityInfo.main : {};
+    const icon = typeof props.currentCityInfo.cityInfo !== 'undefined'
+        ? props.currentCityInfo.cityInfo.weather[0].icon : {};
 
     return (
         <div className="weather-table-wrapper">

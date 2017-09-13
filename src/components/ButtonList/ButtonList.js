@@ -13,7 +13,7 @@ const ButtonList = ({cityList, cityChange, cityRemove}) => (
                         key={index}
                         className="chip"
                         onRequestDelete={() => cityRemove(city)}
-                        onTouchTap={() => cityChange(city)}
+                        onClick={() => cityChange(city)}
                     >
                         {city}
                     </Chip>

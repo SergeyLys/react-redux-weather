@@ -7,18 +7,16 @@ const styles = {
 
 const google = window.google;
 
-export default class Map extends React.Component {
+export default class MapComponent extends React.Component {
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.currentCoord !== nextProps.currentCoord) {
-            this.initMap(nextProps.currentCoord.lat, nextProps.currentCoord.lon);
-        }
+    componentWillUpdate(nextProps) {
+        this.initMap(nextProps.currentCoord.lat, nextProps.currentCoord.lon);
     }
 
     initMap = (lat, lng) => {
         const center = {lat: lat, lng: lng};
 
-        var map = new google.maps.Map(document.getElementById("map"), {
+        const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 16,
             center: center,
             draggable: true,
@@ -31,7 +29,7 @@ export default class Map extends React.Component {
             streetViewControl: false
         });
 
-        var marker = new google.maps.Marker({
+        const marker = new google.maps.Marker({
             position: center,
             map: map,
             title: "my place"
@@ -47,6 +45,6 @@ export default class Map extends React.Component {
     }
 }
 
-Map.PropTypes = {
+MapComponent.PropTypes = {
     currentCoord: PropTypes.object.isRequired
 };

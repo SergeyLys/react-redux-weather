@@ -2,16 +2,10 @@ import React, {Component} from 'react';
 import HomePage from './components/pages/HomePage/HomePage';
 import {connect} from 'react-redux';
 import CitiesActions from './actions/citiesActions';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const google = window.google;
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-        injectTapEventPlugin();
-    }
 
     componentDidMount() {
         if (this.props.currentCityInfo.cities.length !== 0) {
@@ -33,8 +27,6 @@ class App extends Component {
         const geocoder = new google.maps.Geocoder();
         const latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-        // this.props.weatherRequest('Kharkiv');
-
         geocoder.geocode({'latLng': latlng}, (results, status) => {
 
             if (status === google.maps.GeocoderStatus.OK) {
@@ -52,7 +44,9 @@ class App extends Component {
     };
 
     handleChange = (city) => {
-        this.props.currentCityInfo.cityInfo.name !== city ? this.props.weatherRequest(city) : '';
+        if (this.props.currentCityInfo.cityInfo.name !== city) {
+            this.props.weatherRequest(city);
+        }
     };
 
     handleSearch = (city) => {
@@ -62,7 +56,6 @@ class App extends Component {
     };
 
     cityAdd = (city) => {
-        console.log();
         if (this.props.currentCityInfo.cities.indexOf(city) === -1) {
             this.props.cityAdd(city);
         }
