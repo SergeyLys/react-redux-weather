@@ -2,10 +2,17 @@ import React, {Component} from 'react';
 import HomePage from './components/pages/HomePage/HomePage';
 import {connect} from 'react-redux';
 import CitiesActions from './actions/citiesActions';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const google = window.google;
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        injectTapEventPlugin();
+    }
+
     componentDidMount() {
         if (this.props.currentCityInfo.cities.length !== 0) {
             this.props.weatherRequest(this.props.currentCityInfo.cities[0]);

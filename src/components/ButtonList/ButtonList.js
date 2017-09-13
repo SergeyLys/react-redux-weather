@@ -3,31 +3,28 @@ import Chip from 'material-ui/Chip';
 import PropTypes from 'prop-types';
 import './ButtonList.css';
 
-export default class ButtonList extends React.Component {
+const ButtonList = ({cityList, cityChange, cityRemove}) => (
+    <div className="list-wrapper">
 
-    render() {
-        return (
-            <div className="list-wrapper">
+        {
+            cityList.map((city, index)=> {
+                return (
+                    <Chip
+                        key={index}
+                        className="chip"
+                        onRequestDelete={() => cityRemove(city)}
+                        onTouchTap={() => cityChange(city)}
+                    >
+                        {city}
+                    </Chip>
+                )
+            })
+        }
 
-                {
-                    this.props.cityList.map((city, index)=> {
-                        return (
-                            <Chip
-                                key={index}
-                                className="chip"
-                                onRequestDelete={() => this.props.cityRemove(city)}
-                                onTouchTap={() => this.props.cityChange(city)}
-                            >
-                                {city}
-                            </Chip>
-                        )
-                    })
-                }
+    </div>
+);
 
-            </div>
-        )
-    }
-}
+export default ButtonList;
 
 ButtonList.PropTypes = {
     cityList: PropTypes.array,

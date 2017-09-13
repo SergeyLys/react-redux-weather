@@ -69,11 +69,6 @@ export default class ForecastTable extends React.Component {
         )
     }
 }
-//
-// <tbody>
-// <tr><td>{humidity}</td><td>{pressure}</td><td>{temp}</td><td>{temp_max}</td><td>{temp_min}</td><td>
-//     <img src={`http://openweathermap.org/img/w/${icon}.png`} alt=""/></td></tr>
-// </tbody>
 
 PropTypes.ForecastTable = {
     weatherForecastRequest: PropTypes.func.isRequired,

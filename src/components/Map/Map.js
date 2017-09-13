@@ -1,6 +1,4 @@
 import React from 'react';
-// import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-// import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 import PropTypes from 'prop-types';
 
 const styles = {

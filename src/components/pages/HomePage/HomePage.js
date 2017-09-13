@@ -2,35 +2,26 @@ import React from 'react';
 import SearchForm from '../../SearchForm/SearchForm';
 import WeatherTable from '../../WeatherTable/WeatherTable';
 import ButtonList from '../../ButtonList/ButtonList';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import Map from '../../Map/Map';
 import './HomePage.css';
 
-export default class HomePage extends React.Component {
+const HomePage = ({...props}) => (
+    <div className="app">
 
-    constructor(props) {
-        super(props);
-        injectTapEventPlugin();
-    }
+        <SearchForm onSubmit={props.handleSearch}/>
+        <ButtonList
+            cityRemove={props.cityRemove}
+            cityList={props.currentCityInfo.cities}
+            cityChange={props.handleChange}
+        />
+        <WeatherTable
+            cityAdd={props.cityAdd}
+            currentCityInfo={props.currentCityInfo}
+            weatherForecastRequest={props.weatherForecastRequest}
+        />
+        <Map currentCoord={props.currentCityInfo.coord}/>
 
-    render() {
-        return (
-            <div className="app">
+    </div>
+);
 
-                <SearchForm onSubmit={this.props.handleSearch}/>
-                <ButtonList
-                    cityRemove={this.props.cityRemove}
-                    cityList={this.props.currentCityInfo.cities}
-                    cityChange={this.props.handleChange}
-                />
-                <WeatherTable
-                    cityAdd={this.props.cityAdd}
-                    currentCityInfo={this.props.currentCityInfo}
-                    weatherForecastRequest={this.props.weatherForecastRequest}
-                />
-                <Map currentCoord={this.props.currentCityInfo.coord}/>
-
-            </div>
-        );
-    }
-}
+export default HomePage;
