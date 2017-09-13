@@ -29,7 +29,6 @@ export default function cities(state=initialState, action={}) {
             };
 
         case 'CHANGE_LOCATION':
-            console.log(action.payload);
             return {
                 ...state,
                 coord: {

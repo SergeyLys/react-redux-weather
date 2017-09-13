@@ -5,7 +5,7 @@ export default class CitiesActions {
         return dispatch => {
             return axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=0668067898307a2c11b3ef3f78365eb2&units=metric`)
                 .then(res => {
-                    dispatch({type: 'GET_WEATHER', payload: res.data})
+                    dispatch({type: 'GET_WEATHER', payload: res.data});
                 })
                 .catch(err => console.log(err));
         }
@@ -13,11 +13,9 @@ export default class CitiesActions {
 
     static weatherForecastRequest(city) {
         return dispatch => {
-            console.log(city);
             return axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=0668067898307a2c11b3ef3f78365eb2&units=metric`)
                 .then(res => {
-                    console.log(res);
-                    dispatch({type: 'GET_WEATHER_FORECAST', payload: res.data})
+                    dispatch({type: 'GET_WEATHER_FORECAST', payload: res.data});
                 })
                 .catch(err => console.log(err));
         }

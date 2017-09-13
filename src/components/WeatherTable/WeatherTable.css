@@ -12,3 +12,8 @@
     .weather-table-wrapper table th,
     .weather-table-wrapper table td {
       text-align: center; }
+
+.forecast-button-holder {
+  margin: 50px 0;
+  display: flex;
+  justify-content: center; }

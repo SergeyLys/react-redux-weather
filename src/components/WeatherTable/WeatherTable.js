@@ -48,7 +48,7 @@ export default class WeatherTable extends React.Component {
                 </table>
 
                 <ForecastTable
-                    currentCityInfo={this.props.currentCityInfo.cityInfo}
+                    currentCityInfo={this.props.currentCityInfo}
                     weatherForecastRequest={this.props.weatherForecastRequest}
                 />
 
