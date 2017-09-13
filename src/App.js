@@ -7,9 +7,7 @@ const google = window.google;
 
 class App extends Component {
     componentDidMount() {
-
         if (this.props.currentCityInfo.cities.length !== 0) {
-            console.log(google);
             this.props.weatherRequest(this.props.currentCityInfo.cities[0]);
         } else {
             this.getLocation();
@@ -26,10 +24,7 @@ class App extends Component {
 
     setPosition = (position) => {
         const geocoder = new google.maps.Geocoder();
-        
-
-
-        var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        const latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
         // this.props.weatherRequest('Kharkiv');
 
